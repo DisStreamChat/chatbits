@@ -1,0 +1,121 @@
+.message {
+	font-family: inherit !important;
+	max-width: 99vw;
+	width: 99vw;
+	height: fit-content;
+	margin: 0;
+	padding: 0;
+    /* animation: animate-in 0.7s ease-in-out 0s 1 forwards; */
+    transition: all 700ms;
+    transition-property: opacity, transform;
+	animation-delay: 10ms;
+	border-radius: 0.5rem;
+	overflow: hidden;
+	transform-origin: top right;
+	background: rgb(51, 51, 51);
+	font-size: 1.5rem;
+	padding: 0.2rem;
+	margin: 0.125rem 0;
+}
+
+.discord-message {
+	background: #2d688d;
+}
+
+.twitch-message {
+	background: #462b45;
+}
+
+/* .fade-out {
+	animation: animate-out 0.7s ease-in-out 0s forwards !important;
+} */
+
+/* @keyframes animate-in {
+	from {
+		transform: scale(0) translateX(-50%);
+		opacity: 0;
+	}
+	to {
+		transform: scale(1) translateX(0);
+		opacity: 1;
+	}
+}
+
+@keyframes animate-out {
+	from {
+		transform: scale(1) translateX(0);
+		opacity: 1;
+	}
+	to {
+		transform: scale(0) translateX(-50%);
+		opacity: 0;
+	}
+} */
+
+.message.highlighted-message {
+	background: rgb(110, 2, 46);
+}
+
+.message *,
+.compact-message * {
+	color: inherit;
+}
+
+.compact-message {
+	color: white;
+	background: #462b45;
+	display: flex;
+	max-width: 99vw;
+	width: 98.5vw;
+	padding: 0.25rem;
+	border-radius: 0.5rem;
+	margin: 0.25rem 0;
+	justify-content: space-between;
+}
+
+.compact-message-body {
+	font-size: 12px;
+	max-width: 83%;
+	flex-wrap: wrap;
+	display: flex;
+	margin-bottom: -0.25rem;
+}
+
+.compact-message-name {
+	display: flex;
+	align-items: center;
+	width: fit-content;
+	margin-bottom: 0.25rem;
+}
+
+.compact-message-name * {
+	margin: 0 0.1rem;
+}
+
+.compact-message-text {
+	display: flex;
+    align-items: center;
+    width: fit-content;
+    word-break: break-word;
+}
+
+.name-content {
+	margin-right: 0.4rem;
+}
+
+.name-content:after {
+	content: ":";
+	font-size: 14px;
+}
+
+.menu-button {
+	border: none;
+	outline: none !important;
+	background: none;
+	color: inherit;
+	margin-bottom: -0.25rem;
+    margin: 0 0.1rem;
+    max-width: 24px;
+}
+
+

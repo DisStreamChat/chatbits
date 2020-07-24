@@ -1,0 +1,45 @@
+.msg-body {
+	padding: .5rem;
+	max-height: 300px;
+	overflow: auto;
+    margin: 0 !important;
+    width: 97%;
+    word-break: break-word !important;
+    font-size: inherit !important;
+    white-space: pre-wrap; 
+    display: flex;
+    font-family: inherit;
+}
+
+p, h1{
+    margin: 0;
+}
+
+p {
+    word-wrap: break-word !important;
+}
+
+.msg-body *{
+    width: 100%;
+    white-space: pre-wrap;
+}
+
+pre::-webkit-scrollbar {
+  width: 5px !important;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f100;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 15px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

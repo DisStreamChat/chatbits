@@ -14,7 +14,8 @@
     "ecmaVersion": 2020,
     "ecmaFeatures": {
       "legacyDecorators": true,
-      "jsx": true
+      "jsx": true,
+      "modules": true
     }
   },
   "settings": {
@@ -26,8 +27,16 @@
     "space-before-function-paren": 0,
     "react/prop-types": 0,
     "react/jsx-handler-names": 0,
-    "react/jsx-fragments": 0,
+    "react/jsx-fragments": 1,
     "react/no-unused-prop-types": 0,
-    "import/export": 0
+    "import/export": 0,
+    "indent": ["error","tab"],
+    // "prettier/prettier": [
+    //     "error",
+    //     {
+    //         "endOfLine": "auto"
+    //     }
+    // ],
+    "singleAttributePerLine": true,
   }
 }

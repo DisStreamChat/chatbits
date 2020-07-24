@@ -1,0 +1,107 @@
+.profile-pic {
+	max-width: 2.5rem;
+	margin-left: .3rem;
+	margin-top: .3rem;
+	border-radius: 50%;
+    display: inline-block !important;
+    /* background: black  */
+}
+
+.name {
+	display: flex;
+	/* width: 100%; */
+	align-items: center;
+}
+
+.name *{
+    font-weight: bold;
+}
+
+.msg-header {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+}
+
+
+.fade-out {
+	animation: animate-out .7s ease-in-out 0s 1 forwards !important;
+}
+
+.emote {
+	width: 2rem;
+}
+
+@keyframes animate-in {
+	from {
+		transform: scale(0) translateX(-50%);
+        opacity: 0;
+	}
+	to {
+		transform: scale(1) translateX(0);
+        opacity: 1;
+	}
+}
+
+@keyframes animate-out {
+	from {
+		transform: scale(1) translateX(0);
+		opacity: 1;
+	}
+	to {
+        transform: scale(0) translateX(-50%);
+        margin: 0;
+        padding: 0;
+		opacity: 0;
+	}
+}
+
+.menu-button {
+	border: none;
+	outline: none !important;
+	background: none;
+	color: inherit;
+}
+
+
+
+.exit-button:active {
+	transform: scale(.9);
+}
+
+.profile {
+	display: flex;
+	align-items: center;
+	margin-right: .5rem;
+    justify-content: space-around;
+
+}
+
+.sub-badge {
+	position: absolute;
+	top: 32px;
+    left: 32px;
+    /* transform: scale(1.25); */
+}
+
+.chat-badge {
+	margin-left: .5rem;
+}
+
+.badge-0 {
+	margin-left: .75rem;
+}
+
+img.discord {
+	filter: hue-rotate(-10deg);
+}
+
+/* .discord-false {
+	margin: 0 !important;
+} */
+
+.message-footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

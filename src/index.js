@@ -1,6 +1,6 @@
-import React from 'react'
-import styles from './styles.module.css'
+import MessageHeader from "./components/MessageHeader";
+import MessageBody from "./components/MessageBody";
+import MessageFooter from "./components/MessageFooter";
+import Message from "./components/Message";
 
-export const ExampleComponent = ({ text }) => {
-  return <div className={styles.test}>Example Component: {text}</div>
-}
+export {MessageHeader, MessageBody, MessageFooter, Message}

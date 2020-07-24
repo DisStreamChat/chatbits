@@ -1,0 +1,49 @@
+.message-footer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.source-button {
+	border: none;
+	outline: none !important;
+	background: none;
+	color: inherit;
+	padding: 0;
+    width: fit-content;
+    height: 24px;
+    display: flex;
+}
+
+.source {
+	padding-left: .5rem;
+	height: 24px;
+	overflow: hidden;
+    transition: .5s;
+    width: fit-content;
+}
+
+.source.open {
+	height: fit-content;
+}
+
+.source-text {
+    font-size: 1rem;
+    max-width: 70vw;
+}
+
+.time-indicator{
+    font-size: 12px;
+    padding: 0 1rem;
+}
+
+@media screen and (max-width: 375px){
+    .source-text{
+        max-width: 50vw;
+    }
+}
+
+@media screen and (max-width: 225px){
+    .source-text{
+        max-width: 30vw;
+    }
+}
