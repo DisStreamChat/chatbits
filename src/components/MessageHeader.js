@@ -48,7 +48,7 @@ const MessageHeader = props => {
 	return (
 		<div className={`${styles["msg-header"]} ${styles.name}`}>
 			<span className={styles.name}>
-				<div className={`${styles.profile} ${styles[`${props.platform}-${props.DisplayPlatformColors}`]}`}>
+				<div className={`${styles.profile} ${props.streamerInfo.CompactMessages && styles["Compact-header"]} ${styles[`${props.platform}-${props.DisplayPlatformColors}`]}`}>
 					{!props.streamerInfo.CompactMessages && <Avatar className={styles["profile-pic"]} src={props.avatar} alt="" />}
 
 					{!props.streamerInfo.CompactMessages && props.badges.subscriber && (
