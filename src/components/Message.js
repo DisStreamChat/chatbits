@@ -183,7 +183,7 @@ const Message = (props) => {
 		props.delete(props.msg.id, props.msg.platform)
 	}, [props])
 
-	return !streamerInfo.CompactMessages ? (
+	return  (
 		<CSSTransition
 			in={mounted}
 			timeout={{
@@ -233,140 +233,7 @@ const Message = (props) => {
 				</div>
 			)}
 		</CSSTransition>
-	) : (
-		mounted && (
-			<div
-				ref={props.forwardRef}
-				data-idx={props.index}
-				style={
-					streamerInfo.DisplayPlatformColors || props.msg.messageId
-						? color
-						: {}
-				}
-				className={`${styles["compact-message"]} ${
-					streamerInfo.DisplayPlatformColors &&
-					styles[props.msg.platform + "-message"]
-				}`}>
-				<div className={styles["compact-message-body"]}>
-					<span className={styles["compact-message-name"]}>
-						<div className={styles.profile}>
-							{Object.entries(props.msg.badges).map(
-								(badge, i) => {
-									return (
-										<Tooltip
-											arrow
-											title={badge[1].title}
-											placement="top">
-											<img
-												src={badge[1].image}
-												alt=""
-												className={`${
-													styles["chat-badge"]
-												} ${
-													styles[`badge-${i}`]
-												}`}></img>
-										</Tooltip>
-									)
-								}
-							)}
-						</div>
-						{props.streamerInfo.DisplayPlatformIcons && (
-							<Tooltip
-								title={props.msg.platform}
-								placement="top"
-								arrow>
-								<img
-									width="20"
-									src={
-										props.msg.platform === "discord"
-											? discordLogo
-											: twitchLogo
-									}
-									alt="platform"
-									className={`${styles["chat-badge"]} ${
-										styles[props.msg.platform]
-									}`}
-								/>
-							</Tooltip>
-						)}
-						<span
-							className={styles["name-content"]}
-							style={{
-								color: props.streamerInfo.ShowNameColors
-									? props.msg.userColor
-									: ""
-							}}>
-							{props.msg.displayName}
-						</span>
-					</span>
-					<div
-						className={styles["compact-message-text"]}
-						dangerouslySetInnerHTML={{
-							__html: DOMPurify.sanitize(
-								props.streamerInfo.CensorMessages
-									? Filter.clean(props.msg.body)
-									: props.msg.body,
-								{
-									FORBID_ATTR: ["style", "onerror", "onload"],
-									FORBID_TAGS: [
-										"table",
-										"script",
-										"audio",
-										"video",
-										"style",
-										"iframe",
-										"textarea",
-										"input",
-										"form"
-									]
-								}
-							)
-						}}></div>
-				</div>
-				{!props.isOverlay && (
-					<span>
-						<React.Fragment>
-							{props.streamerInfo.ShowModOptions && (
-								<React.Fragment>
-									<button
-										onClick={() =>
-											props.ban(
-												props.msg.uuid,
-												props.msg.platform
-											)
-										}
-										className={styles["menu-button"]}>
-										<ButtonIcon letter="B" />
-									</button>
-									<button
-										onClick={() =>
-											props.timeout(
-												props.msg.uuid,
-												props.msg.platform
-											)
-										}
-										className={styles["menu-button"]}>
-										<ButtonIcon letter="T" />
-									</button>
-								</React.Fragment>
-							)}
-
-							<button
-								className={styles["menu-button"]}
-								onClick={deleteMe}>
-								<HighlightOffTwoToneIcon />
-							</button>
-							<button
-								className={styles["menu-button"]}
-								onClick={props.pin}>
-								<PinIcon pinned={props.msg.pinned} />
-							</button>
-						</React.Fragment>
-					</span>
-				)}
-			</div>
-		)
-	)
+	) 
 }
 
 export default Message

@@ -14,7 +14,7 @@ const App = () => {
 				msg={{
 					body: "test",
 					avatar:
-						"https://static-cdn.jtvnw.net/jtv_user_pictures/9e40522b-dca4-4e2e-9aa0-ccfa6550e208-profile_image-70x70.png",
+						"https://static-cdn.jtvnw.net/jtv_user_pictures/b308a27a-1b9f-413a-b22b-3c9b2815a81a-profile_image-70x70.png",
 					displayName: "david",
                     platform: "twitch",
                     sentAt: 1590536099323,
