@@ -51,18 +51,18 @@ const MessageHeader = props => {
 				<div className={`${styles.profile} ${styles[`${props.platform}-${props.DisplayPlatformColors}`]}`}>
 					{!props.streamerInfo.CompactMessages && <Avatar className={styles["profile-pic"]} src={props.avatar} alt="" />}
 
-					{props.badges.subscriber && (
+					{!props.streamerInfo.CompactMessages && props.badges.subscriber && (
 						<Tooltip arrow title={props.badges.subscriber.title} placement="top">
 							<img className={styles["sub-badge"]} src={props.badges.subscriber.image} alt=""></img>
 						</Tooltip>
 					)}
-					{props.badges.founder && (
+					{!props.streamerInfo.CompactMessages && props.badges.founder && (
 						<Tooltip arrow title={props.badges.founder.title} placement="top">
 							<img className={styles["sub-badge"]} src={props.badges.founder.image} alt=""></img>
 						</Tooltip>
 					)}
 					{Object.entries(props.badges).map((badge, i) => {
-						return !["subscriber", "founder"].includes(badge[0]) ? (
+						return (props.streamerInfo.CompactMessages || !["subscriber", "founder"].includes(badge[0])) ? (
 							<Tooltip arrow title={badge[1].title} placement="top">
 								<img src={badge[1].image} alt="" className={`${styles["chat-badge"]} ${styles[`badge-${i}`]}`}></img>
 							</Tooltip>
