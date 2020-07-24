@@ -91,11 +91,11 @@ const MessageHeader = props => {
 			</span>
 			<span
 				className={styles["menu-buttons"]}
-				style={{
+				style={!props.streamerInfo.CompactMessages ? {
 					position: "relative",
 					top: "-8px",
 					left: "-5px",
-				}}
+				}: {}}
 			>
 				{!props.isOverlay && (
 					<React.Fragment>
