@@ -20,7 +20,7 @@ marked.setOptions({
 
 const MessageBody = props => {
     return (
-        <pre className={styles["msg-body"]} style={{color: props.messageType === "action" ? props.userColor : ""}} dangerouslySetInnerHTML={{
+        <pre className={`${props.streamerInfo.CompactMessages && styles["compact-message"]} ${styles["msg-body"]}`} style={{color: props.messageType === "action" ? props.userColor : ""}} dangerouslySetInnerHTML={{
             __html: (DOMPurify.sanitize(props.streamerInfo.CensorMessages ? Filter.clean(props.body) : props.body, {
                 FORBID_ATTR: [
                     "style",

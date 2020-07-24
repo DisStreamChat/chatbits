@@ -43,3 +43,8 @@ pre::-webkit-scrollbar {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+.compact-message{
+    word-break: break-all !important;
+    padding: 0;
+}

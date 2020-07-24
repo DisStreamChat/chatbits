@@ -18,6 +18,10 @@
 	margin: 0.125rem 0;
 }
 
+.Compact-message{
+    font-size: .75rem;
+}
+
 .discord-message {
 	background: #2d688d;
 }
