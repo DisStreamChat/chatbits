@@ -48,7 +48,11 @@ const MessageHeader = props => {
 	return (
 		<div className={`${styles["msg-header"]} ${styles.name}`}>
 			<span className={styles.name}>
-				<div className={`${styles.profile} ${props.streamerInfo.CompactMessages && styles["Compact-header"]} ${styles[`${props.platform}-${props.DisplayPlatformColors}`]}`}>
+				<div
+					className={`${styles.profile} ${props.streamerInfo.CompactMessages && styles["Compact-header"]} ${
+						styles[`${props.platform}-${props.DisplayPlatformColors}`]
+					}`}
+				>
 					{!props.streamerInfo.CompactMessages && <Avatar className={styles["profile-pic"]} src={props.avatar} alt="" />}
 
 					{!props.streamerInfo.CompactMessages && props.badges.subscriber && (
@@ -62,7 +66,7 @@ const MessageHeader = props => {
 						</Tooltip>
 					)}
 					{Object.entries(props.badges).map((badge, i) => {
-						return (props.streamerInfo.CompactMessages || !["subscriber", "founder"].includes(badge[0])) ? (
+						return props.streamerInfo.CompactMessages || !["subscriber", "founder"].includes(badge[0]) ? (
 							<Tooltip arrow title={badge[1].title} placement="top">
 								<img src={badge[1].image} alt="" className={`${styles["chat-badge"]} ${styles[`badge-${i}`]}`}></img>
 							</Tooltip>
@@ -91,22 +95,30 @@ const MessageHeader = props => {
 			</span>
 			<span
 				className={styles["menu-buttons"]}
-				style={!props.streamerInfo.CompactMessages ? {
-					position: "relative",
-					top: "-8px",
-					left: "-5px",
-				}: {}}
+				style={
+					!props.streamerInfo.CompactMessages
+						? {
+								position: "relative",
+								top: "-8px",
+								left: "-5px",
+						  }
+						: {}
+				}
 			>
 				{!props.isOverlay && (
 					<React.Fragment>
 						{props.streamerInfo.ShowModOptions && props.moddable && (
 							<React.Fragment>
-								<button onClick={props.banUser} className={styles["menu-button"]}>
-									<ButtonIcon letter="B" />
-								</button>
-								<button onClick={props.timeoutUser} className={styles["menu-button"]}>
-									<ButtonIcon letter="T" />
-								</button>
+								<Tooltip title="Ban" placement="top" arrow>
+									<button onClick={props.banUser} className={styles["menu-button"]}>
+										<ButtonIcon letter="B" />
+									</button>
+								</Tooltip>
+								<Tooltip title="Timeout" placement="top" arrow>
+									<button onClick={props.timeoutUser} className={styles["menu-button"]}>
+										<ButtonIcon letter="T" />
+									</button>
+								</Tooltip>
 							</React.Fragment>
 						)}
 
