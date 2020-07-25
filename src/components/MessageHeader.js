@@ -99,7 +99,7 @@ const MessageHeader = props => {
 			>
 				{!props.isOverlay && (
 					<React.Fragment>
-						{props.streamerInfo.ShowModOptions && (
+						{props.streamerInfo.ShowModOptions && props.moddable && (
 							<React.Fragment>
 								<button onClick={props.banUser} className={styles["menu-button"]}>
 									<ButtonIcon letter="B" />
