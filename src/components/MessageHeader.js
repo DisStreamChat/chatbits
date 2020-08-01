@@ -11,7 +11,7 @@ function ButtonIcon(props) {
 				<circle cx="0" cy="0" r="6.25" stroke="currentColor" stroke-width="1.5" fill="currentColor" fill-opacity=".25"></circle>
 				<text x="3" y="12" fill="currentColor" font-family="Montserrat" font-size="8px" stroke-width=".1697">
 					<tspan x="-2.35" y="2.5" fill="currentColor">
-						{props.letter}
+						{letter}
 					</tspan>
 				</text>
 			</g>
@@ -44,29 +44,29 @@ const discordLogo = "https://i.imgur.com/ZOKp8LH.png";
 const twitchLogo =
 	"https://cdn.vox-cdn.com/thumbor/hSP3rKWFHC7hbbtpCp_DIKiRSDI=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/2937002/twitch.0.jpg";
 
-const MessageHeader = props => {
+const MessageHeader = React.memo(({pinned, userColor, streamerInfo, platform, avatar, badges, displayName, isOverlay, deleteMe, pin, banUser, timeoutUser}) => {
 	return (
 		<div className={`${styles["msg-header"]} ${styles.name}`}>
 			<span className={styles.name}>
 				<div
-					className={`${styles.profile} ${props.streamerInfo.CompactMessages && styles["Compact-header"]} ${
-						styles[`${props.platform}-${props.DisplayPlatformColors}`]
+					className={`${styles.profile} ${streamerInfo.CompactMessages && styles["Compact-header"]} ${
+						styles[`${platform}-${streamerInfo.DisplayPlatformColors}`]
 					}`}
 				>
-					{!props.streamerInfo.CompactMessages && <Avatar className={styles["profile-pic"]} src={props.avatar} alt="" />}
+					{!streamerInfo.CompactMessages && <Avatar className={styles["profile-pic"]} src={avatar} alt="" />}
 
-					{!props.streamerInfo.CompactMessages && props.badges.subscriber && (
-						<Tooltip arrow title={props.badges.subscriber.title} placement="top">
-							<img className={styles["sub-badge"]} src={props.badges.subscriber.image} alt=""></img>
+					{!streamerInfo.CompactMessages && badges.subscriber && (
+						<Tooltip arrow title={badges.subscriber.title} placement="top">
+							<img className={styles["sub-badge"]} src={badges.subscriber.image} alt=""></img>
 						</Tooltip>
 					)}
-					{!props.streamerInfo.CompactMessages && props.badges.founder && (
-						<Tooltip arrow title={props.badges.founder.title} placement="top">
-							<img className={styles["sub-badge"]} src={props.badges.founder.image} alt=""></img>
+					{!streamerInfo.CompactMessages && badges.founder && (
+						<Tooltip arrow title={badges.founder.title} placement="top">
+							<img className={styles["sub-badge"]} src={badges.founder.image} alt=""></img>
 						</Tooltip>
 					)}
-					{Object.entries(props.badges).map((badge, i) => {
-						return props.streamerInfo.CompactMessages || !["subscriber", "founder"].includes(badge[0]) ? (
+					{Object.entries(badges).map((badge, i) => {
+						return streamerInfo.CompactMessages || !["subscriber", "founder"].includes(badge[0]) ? (
 							<Tooltip arrow title={badge[1].title} placement="top">
 								<img src={badge[1].image} alt="" className={`${styles["chat-badge"]} ${styles[`badge-${i}`]}`}></img>
 							</Tooltip>
@@ -77,18 +77,18 @@ const MessageHeader = props => {
 				</div>
 				<span
 					style={{
-						color: props.streamerInfo.ShowNameColors ? props.userColor : "",
+						color: streamerInfo.ShowNameColors ? userColor : "",
 					}}
 				>
-					{props.displayName}
+					{displayName}
 				</span>
-				{props.streamerInfo.DisplayPlatformIcons && (
-					<Tooltip title={props.platform} placement="top" arrow>
+				{streamerInfo.DisplayPlatformIcons && (
+					<Tooltip title={platform} placement="top" arrow>
 						<img
 							width="20"
-							src={props.platform === "discord" ? discordLogo : twitchLogo}
+							src={platform === "discord" ? discordLogo : twitchLogo}
 							alt="platform"
-							className={`${styles["chat-badge"]} ${styles[props.platform]}`}
+							className={`${styles["chat-badge"]} ${styles[platform]}`}
 						/>
 					</Tooltip>
 				)}
@@ -96,7 +96,7 @@ const MessageHeader = props => {
 			<span
 				className={styles["menu-buttons"]}
 				style={
-					!props.streamerInfo.CompactMessages
+					!streamerInfo.CompactMessages
 						? {
 								position: "relative",
 								top: "-8px",
@@ -105,34 +105,34 @@ const MessageHeader = props => {
 						: {}
 				}
 			>
-				{!props.isOverlay && (
+				{!isOverlay && (
 					<React.Fragment>
-						{props.streamerInfo.ShowModOptions && props.moddable && (
+						{streamerInfo.ShowModOptions && moddable && (
 							<React.Fragment>
 								<Tooltip title="Ban" placement="top" arrow>
-									<button onClick={props.banUser} className={styles["menu-button"]}>
+									<button onClick={banUser} className={styles["menu-button"]}>
 										<ButtonIcon letter="B" />
 									</button>
 								</Tooltip>
 								<Tooltip title="Timeout" placement="top" arrow>
-									<button onClick={props.timeoutUser} className={styles["menu-button"]}>
+									<button onClick={timeoutUser} className={styles["menu-button"]}>
 										<ButtonIcon letter="T" />
 									</button>
 								</Tooltip>
 							</React.Fragment>
 						)}
 
-						<button className={styles["menu-button"]} onClick={props.deleteMe}>
+						<button className={styles["menu-button"]} onClick={deleteMe}>
 							<HighlightOffTwoToneIcon />
 						</button>
-						<button className={styles["menu-button"]} onClick={props.pin}>
-							<PinIcon pinned={props.pinned} />
+						<button className={styles["menu-button"]} onClick={pin}>
+							<PinIcon pinned={pinned} />
 						</button>
 					</React.Fragment>
 				)}
 			</span>
 		</div>
 	);
-};
+});
 
 export default MessageHeader;

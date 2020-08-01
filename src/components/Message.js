@@ -34,66 +34,54 @@ function brightnessByColor(color) {
 	if (typeof r != "undefined") return (r * 299 + g * 587 + b * 114) / 1000
 }
 
-const Message = (props) => {
-	const { streamerInfo } = props
-
-	const [active, setActive] = useState(true)
+const Message = React.memo(({ban, timeout, index, msg, delete: deleteFunc, streamerInfo, isOverlay, forwardRef, pin, in: inProp}) => {
 	const [color, setColor] = useState({})
-	const [showSource, setShowSource] = useState(false)
-	const [style, setStyle] = useState({})
 	const [mounted, setMounted] = useState(false)
-	const { in: inProp } = props
 
 	useEffect(() => {
 		setMounted(inProp)
 	}, [inProp])
 
 	useEffect(() => {
-		setStyle({
-			fontFamily: `${streamerInfo.Font} !important`,
-			...(streamerInfo.DisplayPlatformColors || props.msg.messageId
-				? color
-				: {})
-		})
-	}, [color, streamerInfo])
-
-	useEffect(() => {
 		const backgroundColor =
-			props.msg.messageId === "raid"
+			msg.messageId === "raid"
 				? streamerInfo.RaidColor
-				: props.msg.messageId === "follow"
+				: msg.messageId === "follow"
 				? streamerInfo.FollowColor
-				: props.msg.messageId === "subgift"
+				: msg.messageId === "subgift"
 				? streamerInfo.SubGiftColor
-				: props.msg.messageId === "subscription"
+				: msg.messageId === "subscription"
 				? streamerInfo.SubscriptionColor
-				: props.msg.messageId === "cheer"
+				: msg.messageId === "cheer"
 				? streamerInfo.CheerColor
-				: props.msg.messageId === "highlighted-message"
+				: msg.messageId === "highlighted-message"
 				? streamerInfo.HighlightedMessageColor
-				: props.msg.platform === "twitch"
+				: msg.platform === "twitch"
 				? streamerInfo.TwitchColor
 				: streamerInfo.DiscordColor
 		const color =
 			backgroundColor === ""
 				? ""
-				: brightnessByColor(backgroundColor) / 255 > 0.5
+				: brightnessByColor(backgroundColor) / 255 > 0.6
 				? "black"
 				: "white"
 		setColor({
 			backgroundColor,
 			color
 		})
-	}, [props, streamerInfo])
-
-	useEffect(() => {
-		setActive((a) => a && !props.msg.deleted)
-	}, [props])
+	}, [msg, streamerInfo])
 
 	const deleteMe = useCallback(() => {
-		setActive(false)
-		props.delete(props.msg.id, props.msg.platform)
-	}, [props])
+		deleteFunc(msg.id, msg.platform)
+    }, [msg])
+    
+    const banMe = useCallback(() => {
+        ban(msg.uuid, msg.platform)
+    }, [msg, ban])
+
+    const timeoutMe = useCallback(() => {
+        timeout(msg.uuid, msg.platform)
+    }, [msg, timeout])
 
 	return  (
 		<CSSTransition
@@ -102,50 +90,44 @@ const Message = (props) => {
 				enter: 100,
 				exit: 500
 			}}
-			key={props.msg.id}
-			classNames={!props.streamerInfo.CompactMessages && { ...Transition }}
+			key={msg.id}
+			classNames={!streamerInfo.CompactMessages && { ...Transition }}
 			mountOnEnter
 			unmountOnExit>
 			{() => (
 				<div
-					ref={props.forwardRef}
-					data-idx={props.index}
-					style={style}
-					className={`${showSource && styles["showing-source"]} ${
+					ref={forwardRef}
+					data-idx={index}
+					style={color}
+					className={`${
 						styles["message"]
-					} ${props.streamerInfo.CompactMessages && styles["Compact-message"]} ${styles[props.msg.messageId]} ${
+					} ${streamerInfo.CompactMessages && styles["Compact-message"]} ${styles[msg.messageId]} ${
 						streamerInfo.DisplayPlatformColors &&
-						styles[props.msg.platform + "-message"]
-					} ${!active && styles["fade-out"]}`}>
+						styles[msg.platform + "-message"]
+					}`}>
 					<MessageHeader
-						isOverlay={!!props.isOverlay}
+						isOverlay={!!isOverlay}
 						deleteMe={deleteMe}
-						pin={props.pin}
-						banUser={() =>
-							props.ban(props.msg.uuid, props.msg.platform)
-						}
-						timeoutUser={() =>
-							props.timeout(props.msg.uuid, props.msg.platform)
-						}
+						pin={pin}
+						banUser={banMe}
+						timeoutUser={timeoutMe}
 						streamerInfo={streamerInfo}
-						{...props.msg}
+						{...msg}
 					/>
 					<MessageBody
-						isOverlay={!!props.isOverlay}
+						isOverlay={!!isOverlay}
 						streamerInfo={streamerInfo}
-						{...props.msg}
+						{...msg}
 					/>
-					{!props.streamerInfo.CompactMessages && <MessageFooter
-						isOverlay={!!props.isOverlay}
-						showSource={showSource}
-						setShowSource={setShowSource}
+					{!streamerInfo.CompactMessages && <MessageFooter
+						isOverlay={!!isOverlay}
 						streamerInfo={streamerInfo}
-						{...props.msg}
+						{...msg}
 					/>}
 				</div>
 			)}
 		</CSSTransition>
 	) 
-}
+})
 
 export default Message
