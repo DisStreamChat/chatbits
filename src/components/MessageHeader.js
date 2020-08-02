@@ -45,7 +45,7 @@ const twitchLogo =
 	"https://cdn.vox-cdn.com/thumbor/hSP3rKWFHC7hbbtpCp_DIKiRSDI=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/2937002/twitch.0.jpg";
 
 const MessageHeader = React.memo(
-	({ pinned, userColor, streamerInfo, platform, avatar, badges, displayName, isOverlay, deleteMe, pin, banUser, timeoutUser }) => {
+	({ moddable, pinned, userColor, streamerInfo, platform, avatar, badges, displayName, isOverlay, deleteMe, pin, banUser, timeoutUser }) => {
 		return (
 			<div className={`${styles["msg-header"]} ${styles.name}`}>
 				<span className={styles.name}>
