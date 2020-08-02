@@ -4,7 +4,7 @@ import HighlightOffTwoToneIcon from "@material-ui/icons/HighlightOffTwoTone";
 import Tooltip from "@material-ui/core/Tooltip";
 import styles from "./MessageHeader.css";
 
-function ButtonIcon(props) {
+const ButtonIcon = React.memo(({ letter }) => {
 	return (
 		<svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="MuiSvgIcon-root" viewBox="0 0 16 16">
 			<g xmlns="http://www.w3.org/2000/svg" transform="translate(8, 8)">
@@ -17,9 +17,9 @@ function ButtonIcon(props) {
 			</g>
 		</svg>
 	);
-}
+});
 
-function PinIcon({ pinned }) {
+const PinIcon = React.memo(({ pinned }) => {
 	return !pinned ? (
 		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
 			<path opacity=".3" d="M14 4h-4v5c0 1.1-.35 2.14-1 3h6c-.63-.84-1-1.88-1-3V4z" fill="currentColor" />
@@ -38,101 +38,103 @@ function PinIcon({ pinned }) {
 			<path d="M2.27 2.27L1 3.54L20.46 23l1.27-1.27L11 11z" fill="currentColor" />
 		</svg>
 	);
-}
+});
 
 const discordLogo = "https://i.imgur.com/ZOKp8LH.png";
 const twitchLogo =
 	"https://cdn.vox-cdn.com/thumbor/hSP3rKWFHC7hbbtpCp_DIKiRSDI=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/2937002/twitch.0.jpg";
 
-const MessageHeader = React.memo(({pinned, userColor, streamerInfo, platform, avatar, badges, displayName, isOverlay, deleteMe, pin, banUser, timeoutUser}) => {
-	return (
-		<div className={`${styles["msg-header"]} ${styles.name}`}>
-			<span className={styles.name}>
-				<div
-					className={`${styles.profile} ${streamerInfo.CompactMessages && styles["Compact-header"]} ${
-						styles[`${platform}-${streamerInfo.DisplayPlatformColors}`]
-					}`}
-				>
-					{!streamerInfo.CompactMessages && <Avatar className={styles["profile-pic"]} src={avatar} alt="" />}
+const MessageHeader = React.memo(
+	({ pinned, userColor, streamerInfo, platform, avatar, badges, displayName, isOverlay, deleteMe, pin, banUser, timeoutUser }) => {
+		return (
+			<div className={`${styles["msg-header"]} ${styles.name}`}>
+				<span className={styles.name}>
+					<div
+						className={`${styles.profile} ${streamerInfo.CompactMessages && styles["Compact-header"]} ${
+							styles[`${platform}-${streamerInfo.DisplayPlatformColors}`]
+						}`}
+					>
+						{!streamerInfo.CompactMessages && <Avatar className={styles["profile-pic"]} src={avatar} alt="" />}
 
-					{!streamerInfo.CompactMessages && badges.subscriber && (
-						<Tooltip arrow title={badges.subscriber.title} placement="top">
-							<img className={styles["sub-badge"]} src={badges.subscriber.image} alt=""></img>
-						</Tooltip>
-					)}
-					{!streamerInfo.CompactMessages && badges.founder && (
-						<Tooltip arrow title={badges.founder.title} placement="top">
-							<img className={styles["sub-badge"]} src={badges.founder.image} alt=""></img>
-						</Tooltip>
-					)}
-					{Object.entries(badges).map((badge, i) => {
-						return streamerInfo.CompactMessages || !["subscriber", "founder"].includes(badge[0]) ? (
-							<Tooltip arrow title={badge[1].title} placement="top">
-								<img src={badge[1].image} alt="" className={`${styles["chat-badge"]} ${styles[`badge-${i}`]}`}></img>
+						{!streamerInfo.CompactMessages && badges.subscriber && (
+							<Tooltip arrow title={badges.subscriber.title} placement="top">
+								<img className={styles["sub-badge"]} src={badges.subscriber.image} alt=""></img>
 							</Tooltip>
-						) : (
-							<React.Fragment></React.Fragment>
-						);
-					})}
-				</div>
-				<span
-					style={{
-						color: streamerInfo.ShowNameColors ? userColor : "",
-					}}
-				>
-					{displayName}
-				</span>
-				{streamerInfo.DisplayPlatformIcons && (
-					<Tooltip title={platform} placement="top" arrow>
-						<img
-							width="20"
-							src={platform === "discord" ? discordLogo : twitchLogo}
-							alt="platform"
-							className={`${styles["chat-badge"]} ${styles[platform]}`}
-						/>
-					</Tooltip>
-				)}
-			</span>
-			<span
-				className={styles["menu-buttons"]}
-				style={
-					!streamerInfo.CompactMessages
-						? {
-								position: "relative",
-								top: "-8px",
-								left: "-5px",
-						  }
-						: {}
-				}
-			>
-				{!isOverlay && (
-					<React.Fragment>
-						{streamerInfo.ShowModOptions && moddable && (
-							<React.Fragment>
-								<Tooltip title="Ban" placement="top" arrow>
-									<button onClick={banUser} className={styles["menu-button"]}>
-										<ButtonIcon letter="B" />
-									</button>
-								</Tooltip>
-								<Tooltip title="Timeout" placement="top" arrow>
-									<button onClick={timeoutUser} className={styles["menu-button"]}>
-										<ButtonIcon letter="T" />
-									</button>
-								</Tooltip>
-							</React.Fragment>
 						)}
+						{!streamerInfo.CompactMessages && badges.founder && (
+							<Tooltip arrow title={badges.founder.title} placement="top">
+								<img className={styles["sub-badge"]} src={badges.founder.image} alt=""></img>
+							</Tooltip>
+						)}
+						{Object.entries(badges).map((badge, i) => {
+							return streamerInfo.CompactMessages || !["subscriber", "founder"].includes(badge[0]) ? (
+								<Tooltip arrow title={badge[1].title} placement="top">
+									<img src={badge[1].image} alt="" className={`${styles["chat-badge"]} ${styles[`badge-${i}`]}`}></img>
+								</Tooltip>
+							) : (
+								<React.Fragment></React.Fragment>
+							);
+						})}
+					</div>
+					<span
+						style={{
+							color: streamerInfo.ShowNameColors ? userColor : "",
+						}}
+					>
+						{displayName}
+					</span>
+					{streamerInfo.DisplayPlatformIcons && (
+						<Tooltip title={platform} placement="top" arrow>
+							<img
+								width="20"
+								src={platform === "discord" ? discordLogo : twitchLogo}
+								alt="platform"
+								className={`${styles["chat-badge"]} ${styles[platform]}`}
+							/>
+						</Tooltip>
+					)}
+				</span>
+				<span
+					className={styles["menu-buttons"]}
+					style={
+						!streamerInfo.CompactMessages
+							? {
+									position: "relative",
+									top: "-8px",
+									left: "-5px",
+							  }
+							: {}
+					}
+				>
+					{!isOverlay && (
+						<React.Fragment>
+							{streamerInfo.ShowModOptions && moddable && (
+								<React.Fragment>
+									<Tooltip title="Ban" placement="top" arrow>
+										<button onClick={banUser} className={styles["menu-button"]}>
+											<ButtonIcon letter="B" />
+										</button>
+									</Tooltip>
+									<Tooltip title="Timeout" placement="top" arrow>
+										<button onClick={timeoutUser} className={styles["menu-button"]}>
+											<ButtonIcon letter="T" />
+										</button>
+									</Tooltip>
+								</React.Fragment>
+							)}
 
-						<button className={styles["menu-button"]} onClick={deleteMe}>
-							<HighlightOffTwoToneIcon />
-						</button>
-						<button className={styles["menu-button"]} onClick={pin}>
-							<PinIcon pinned={pinned} />
-						</button>
-					</React.Fragment>
-				)}
-			</span>
-		</div>
-	);
-});
+							<button className={styles["menu-button"]} onClick={deleteMe}>
+								<HighlightOffTwoToneIcon />
+							</button>
+							<button className={styles["menu-button"]} onClick={pin}>
+								<PinIcon pinned={pinned} />
+							</button>
+						</React.Fragment>
+					)}
+				</span>
+			</div>
+		);
+	}
+);
 
 export default MessageHeader;
