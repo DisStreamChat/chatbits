@@ -83,6 +83,8 @@ const Message = React.memo(({ban, timeout, index, msg, delete: deleteFunc, strea
         timeout(msg.uuid, msg.platform)
     }, [msg, timeout])
 
+    console.log(streamerInfo)
+
 	return  (
 		<CSSTransition
 			in={mounted}
@@ -98,11 +100,11 @@ const Message = React.memo(({ban, timeout, index, msg, delete: deleteFunc, strea
 				<div
 					ref={forwardRef}
 					data-idx={index}
-					style={color}
+					style={streamerInfo.DisplayPlatformColors ? color : {}}
 					className={`${
 						styles["message"]
 					} ${streamerInfo.CompactMessages && styles["Compact-message"]} ${styles[msg.messageId]} ${
-						streamerInfo.DisplayPlatformColors &&
+		
 						styles[msg.platform + "-message"]
 					}`}>
 					<MessageHeader
