@@ -67,9 +67,7 @@ const Message = React.memo(({ ban, timeout, index, msg, delete: deleteFunc, stre
 		}else{
             nameColorAdjuster.current.base = backgroundColor || "#515151"
         }
-        console.log("userColor: ", msg.userColor)
         const newNameColor = nameColorAdjuster.current.process(msg.userColor)
-        console.log("nameColor: ", newNameColor)
         setNameColor(newNameColor)
 		const color =
 			backgroundColor === "" || !streamerInfo.DisplayPlatformColors ? "" : brightnessByColor(backgroundColor) / 255 > 0.6 ? "black" : "white";
