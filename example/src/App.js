@@ -9,7 +9,7 @@ const App = () => {
 		<div>
 			<Message
 				delete={() => {}}
-                streamerInfo={{DisplayPlatformColors: true, TwitchColor: "#462B45", ShowNameColors: true }}
+                streamerInfo={{DisplayPlatformColors: true, TwitchColor: "#0000ff", ShowNameColors: true }}
                 in={true}
 				msg={{
 					body: "test",
