@@ -68,7 +68,6 @@ const Message = React.memo(({ ban, timeout, index, msg, delete: deleteFunc, stre
             nameColorAdjuster.current.base = backgroundColor || "#515151"
         }
         const newNameColor = nameColorAdjuster.current.process(msg.userColor)
-        console.log(newNameColor)
         setNameColor(newNameColor)
 		const color =
 			backgroundColor === "" || !streamerInfo.DisplayPlatformColors ? "" : brightnessByColor(backgroundColor) / 255 > 0.6 ? "black" : "white";
@@ -90,7 +89,6 @@ const Message = React.memo(({ ban, timeout, index, msg, delete: deleteFunc, stre
 		timeout(msg.uuid, msg.platform);
 	}, [msg, timeout]);
 
-	console.log(streamerInfo);
 
 	return (
 		<CSSTransition
