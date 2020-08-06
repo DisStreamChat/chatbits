@@ -39,6 +39,7 @@ const Message = React.memo(({ ban, timeout, index, msg, delete: deleteFunc, stre
 	const [color, setColor] = useState({});
     const [mounted, setMounted] = useState(false);
     const [nameColor, setNameColor] = useState()
+    const [islight, setIsLight] = useState()
 	const nameColorAdjuster = useRef();
 
 	useEffect(() => {
@@ -69,8 +70,10 @@ const Message = React.memo(({ ban, timeout, index, msg, delete: deleteFunc, stre
         }
         const newNameColor = nameColorAdjuster.current.process(msg.userColor)
         setNameColor(newNameColor)
+        const isBackgroundLight = brightnessByColor(backgroundColor) / 255 > 0.6;
+        setIsLight(isBackgroundLight)
 		const color =
-			backgroundColor === "" || !streamerInfo.DisplayPlatformColors ? "" : brightnessByColor(backgroundColor) / 255 > 0.6 ? "black" : "white";
+			backgroundColor === "" || !streamerInfo.DisplayPlatformColors ? "" : isBackgroundLight ? "black" : "white";
 		setColor({
 			backgroundColor,
 			color,
@@ -107,7 +110,7 @@ const Message = React.memo(({ ban, timeout, index, msg, delete: deleteFunc, stre
 					ref={forwardRef}
 					data-idx={index}
 					style={streamerInfo.DisplayPlatformColors ? color : {}}
-					className={`${styles["message"]} ${streamerInfo.CompactMessages && styles["Compact-message"]} ${styles[msg.messageId]} ${
+					className={`${islight ? "dark" : "light"}${styles["message"]} ${streamerInfo.CompactMessages && styles["Compact-message"]} ${styles[msg.messageId]} ${
 						streamerInfo.DisplayPlatformColors && styles[msg.platform + "-message"]
 					}`}
 				>
