@@ -106,7 +106,7 @@ const MessageHeader = React.memo(
 							: {}
 					}
 				>
-					{!isOverlay && (
+					{!isOverlay && !streamerInfo.CompactMessages && (
 						<React.Fragment>
 							{streamerInfo.ShowModOptions && moddable && (
 								<React.Fragment>
