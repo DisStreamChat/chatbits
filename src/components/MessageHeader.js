@@ -47,7 +47,7 @@ const twitchLogo =
 const MessageHeader = React.memo(
 	({ moddable, pinned, userColor, streamerInfo, platform, avatar, badges, displayName, isOverlay, deleteMe, pin, banUser, timeoutUser, NameColor }) => {
         return (
-			<div className={`${styles["msg-header"]} ${styles.name}`}>
+			<div className={`${styles["msg-header"]} ${streamerInfo.CompactMessages && styles["Compact-header-full"]} ${styles.name}`}>
 				<span className={styles.name}>
 					<div
 						className={`${styles.profile} ${streamerInfo.CompactMessages && styles["Compact-header"]} ${
@@ -79,7 +79,8 @@ const MessageHeader = React.memo(
 					<span
 						style={{
 							color: streamerInfo.ShowNameColors ? NameColor : "",
-						}}
+                        }}
+                        className={styles["user-name"]}
 					>
 						{displayName}
 					</span>

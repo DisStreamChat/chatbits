@@ -1,24 +1,35 @@
 .profile-pic {
 	max-width: 2.5rem;
-	margin-left: .3rem;
-	margin-top: .3rem;
+	margin-left: 0.3rem;
+	margin-top: 0.3rem;
 	border-radius: 50%;
-    display: inline-flex !important;
-    /* background: black  */
+	display: inline-flex !important;
+	/* background: black  */
 }
 
-.Compact-header{
-    margin-left: -.5rem;
+.Compact-header {
+	margin-left: -0.5rem;
+}
+.Compact-header-full {
+	display: inline !important;
+}
+
+.Compact-header ~ .user-name::after {
+	content: ": ";
+	display: inline;
 }
 
 .name {
 	display: flex;
-	/* width: 100%; */
 	align-items: center;
 }
 
-.name *{
-    font-weight: bold;
+.Compact-header-full  .name{
+    display: inline !important
+}
+
+.name * {
+	font-weight: bold;
 }
 
 .msg-header {
@@ -27,9 +38,8 @@
 	justify-content: space-between;
 }
 
-
 .fade-out {
-	animation: animate-out .7s ease-in-out 0s 1 forwards !important;
+	animation: animate-out 0.7s ease-in-out 0s 1 forwards !important;
 }
 
 .emote {
@@ -39,11 +49,11 @@
 @keyframes animate-in {
 	from {
 		transform: scale(0) translateX(-50%);
-        opacity: 0;
+		opacity: 0;
 	}
 	to {
 		transform: scale(1) translateX(0);
-        opacity: 1;
+		opacity: 1;
 	}
 }
 
@@ -53,9 +63,9 @@
 		opacity: 1;
 	}
 	to {
-        transform: scale(0) translateX(-50%);
-        margin: 0;
-        padding: 0;
+		transform: scale(0) translateX(-50%);
+		margin: 0;
+		padding: 0;
 		opacity: 0;
 	}
 }
@@ -67,33 +77,30 @@
 	color: inherit;
 }
 
-
-
 .exit-button:active {
-	transform: scale(.9);
+	transform: scale(0.9);
 }
 
 .profile {
 	display: flex;
 	align-items: center;
-	margin-right: .5rem;
-    justify-content: space-around;
-
+	margin-right: 0.5rem;
+	justify-content: space-around;
 }
 
 .sub-badge {
 	position: absolute;
 	top: 32px;
-    left: 32px;
-    /* transform: scale(1.25); */
+	left: 32px;
+	/* transform: scale(1.25); */
 }
 
 .chat-badge {
-	margin-left: .5rem;
+	margin-left: 0.5rem;
 }
 
 .badge-0 {
-	margin-left: .75rem;
+	margin-left: 0.75rem;
 }
 
 img.discord {
@@ -104,8 +111,8 @@ img.discord {
 	margin: 0 !important;
 } */
 
-.message-footer{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.message-footer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }

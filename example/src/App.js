@@ -19,7 +19,7 @@ const App = () => {
                     platform: "twitch",
                     sentAt: 1590536099323,
                     badges: {},
-                    userColor: "#0000ff"
+                    userColor: "#ff4500"
                     // userColor: "#d2691e"
 				}}
 			/>
