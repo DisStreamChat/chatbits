@@ -45,8 +45,23 @@ const twitchLogo =
 	"https://cdn.vox-cdn.com/thumbor/hSP3rKWFHC7hbbtpCp_DIKiRSDI=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/2937002/twitch.0.jpg";
 
 const MessageHeader = React.memo(
-	({ moddable, pinned, userColor, streamerInfo, platform, avatar, badges, displayName, isOverlay, deleteMe, pin, banUser, timeoutUser, NameColor }) => {
-        return (
+	({
+		moddable,
+		pinned,
+		userColor,
+		streamerInfo,
+		platform,
+		avatar,
+		badges,
+		displayName,
+		isOverlay,
+		deleteMe,
+		pin,
+		banUser,
+		timeoutUser,
+		NameColor,
+	}) => {
+		return (
 			<div className={`${styles["msg-header"]} ${streamerInfo.CompactMessages && styles["Compact-header-full"]} ${styles.name}`}>
 				<span className={styles.name}>
 					<div
@@ -75,25 +90,25 @@ const MessageHeader = React.memo(
 								<React.Fragment></React.Fragment>
 							);
 						})}
+						{streamerInfo.DisplayPlatformIcons && (
+							<Tooltip title={platform} placement="top" arrow>
+								<img
+									width="20"
+									src={platform === "discord" ? discordLogo : twitchLogo}
+									alt="platform"
+									className={`${styles["chat-badge"]} ${styles[platform]}`}
+								/>
+							</Tooltip>
+						)}
 					</div>
 					<span
 						style={{
 							color: streamerInfo.ShowNameColors ? NameColor : "",
-                        }}
-                        className={styles["user-name"]}
+						}}
+						className={styles["user-name"]}
 					>
 						{displayName}
 					</span>
-					{streamerInfo.DisplayPlatformIcons && (
-						<Tooltip title={platform} placement="top" arrow>
-							<img
-								width="20"
-								src={platform === "discord" ? discordLogo : twitchLogo}
-								alt="platform"
-								className={`${styles["chat-badge"]} ${styles[platform]}`}
-							/>
-						</Tooltip>
-					)}
 				</span>
 				<span
 					className={styles["menu-buttons"]}
