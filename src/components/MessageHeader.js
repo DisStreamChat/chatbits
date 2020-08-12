@@ -78,10 +78,10 @@ const MessageHeader = React.memo(
 									<MenuIcon />
 								</ContextMenuTrigger>
 								<ContextMenu id={id}>
-									<MenuItem onClick={() => {}}>Delete Message</MenuItem>
-									<MenuItem onClick={() => {}}>Timeout</MenuItem>
-									<MenuItem onClick={() => {}}>Ban</MenuItem>
-									<MenuItem onClick={() => {}}>{pinned? "unpin" : "pin"}</MenuItem>
+									<MenuItem onClick={deleteMe}>Delete Message</MenuItem>
+									<MenuItem onClick={timeoutUser}>Timeout</MenuItem>
+									<MenuItem onClick={banUser}>Ban</MenuItem>
+									<MenuItem onClick={pin}>{pinned? "unpin" : "pin"}</MenuItem>
 								</ContextMenu>
 							</React.Fragment>
 						)}
