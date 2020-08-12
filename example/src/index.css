@@ -11,3 +11,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.react-contextmenu{
+    background: #515151;
+}
+.react-contextmenu-item{
+    padding: .25rem .5rem;
+    cursor: pointer;
+    color: black;
+}

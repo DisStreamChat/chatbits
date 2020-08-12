@@ -19,7 +19,8 @@ const App = () => {
                     platform: "twitch",
                     sentAt: 1590536099323,
                     badges: {},
-                    userColor: "#ff4500"
+                    userColor: "#ff4500",
+                    id: "12334513"
                     // userColor: "#d2691e"
 				}}
 			/>
@@ -35,8 +36,9 @@ const App = () => {
                     platform: "twitch",
                     sentAt: 1590536099323,
                     badges: {},
-                    userColor: "#d2691e"
-				}}
+                    userColor: "#d2691e",
+                    id: "84095673"
+                }}
 			/>
 		</div>
 	)

@@ -3,6 +3,8 @@ import Avatar from "@material-ui/core/Avatar";
 import HighlightOffTwoToneIcon from "@material-ui/icons/HighlightOffTwoTone";
 import Tooltip from "@material-ui/core/Tooltip";
 import styles from "./MessageHeader.css";
+import MenuIcon from "@material-ui/icons/Menu";
+import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
 
 const ButtonIcon = React.memo(({ letter }) => {
 	return (
@@ -60,6 +62,7 @@ const MessageHeader = React.memo(
 		banUser,
 		timeoutUser,
 		NameColor,
+		id,
 	}) => {
 		return (
 			<div className={`${styles["msg-header"]} ${streamerInfo.CompactMessages && styles["Compact-header-full"]} ${styles.name}`}>
@@ -69,6 +72,19 @@ const MessageHeader = React.memo(
 							styles[`${platform}-${streamerInfo.DisplayPlatformColors}`]
 						}`}
 					>
+						{streamerInfo.CompactMessages && (
+							<React.Fragment>
+								<ContextMenuTrigger id={id}>
+									<MenuIcon />
+								</ContextMenuTrigger>
+								<ContextMenu id={id}>
+									<MenuItem onClick={() => {}}>Delete Message</MenuItem>
+									<MenuItem onClick={() => {}}>Timeout</MenuItem>
+									<MenuItem onClick={() => {}}>Ban</MenuItem>
+									<MenuItem onClick={() => {}}>{pinned? "unpin" : "pin"}</MenuItem>
+								</ContextMenu>
+							</React.Fragment>
+						)}
 						{!streamerInfo.CompactMessages && <Avatar className={styles["profile-pic"]} src={avatar} alt="" />}
 
 						{!streamerInfo.CompactMessages && badges.subscriber && (
