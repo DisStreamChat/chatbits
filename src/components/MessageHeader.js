@@ -80,10 +80,10 @@ const MessageHeader = React.memo(
 								<ContextMenu id={id}>
 									<MenuItem onClick={deleteMe}>Delete Message</MenuItem>
 									{moddable && (
-										<>
+										<React.Fragment>
 											<MenuItem onClick={timeoutUser}>Timeout User</MenuItem>
 											<MenuItem onClick={banUser}>Ban User</MenuItem>
-										</>
+										</React.Fragment>
 									)}
 									<MenuItem onClick={pin}>{pinned ? "Unpin" : "Pin"} Message</MenuItem>
 								</ContextMenu>
