@@ -26,6 +26,11 @@
 	background: #462b45;
 }
 
+.no-gaps{
+    margin: 0 !important;
+	border-radius: 0 !important;
+}
+
 .Compact-message {
 	font-size: 0.75rem;
 	margin: 0;

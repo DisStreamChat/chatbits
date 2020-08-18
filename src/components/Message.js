@@ -110,7 +110,7 @@ const Message = React.memo(({ ban, timeout, index, msg, delete: deleteFunc, stre
 					ref={forwardRef}
 					data-idx={index}
 					style={streamerInfo.DisplayPlatformColors ? color : {}}
-					className={`${islight ? "dark" : "light"} ${styles["message"]} ${streamerInfo.CompactMessages && styles["Compact-message"]} ${styles[msg.messageId]} ${
+					className={`${islight ? "dark" : "light"} ${streamerInfo.RemoveMessageGaps ? styles["no-gaps"] : ""} ${styles["message"]} ${streamerInfo.CompactMessages && styles["Compact-message"]} ${styles[msg.messageId]} ${
 						streamerInfo.DisplayPlatformColors && styles[msg.platform + "-message"]
 					}`}
 				>

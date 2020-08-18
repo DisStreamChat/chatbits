@@ -9,7 +9,7 @@ const App = () => {
 		<div>
 			<Message
 				delete={() => {}}
-                streamerInfo={{DisplayPlatformColors: false, TwitchColor: "#0000ff", ShowNameColors: true, CompactMessages: true }}
+                streamerInfo={{DisplayPlatformColors: false, TwitchColor: "#0000ff", ShowNameColors: true, CompactMessages: false, RemoveMessageGaps: true }}
                 in={true}
 				msg={{
 					body: "test",
@@ -26,7 +26,7 @@ const App = () => {
 			/>
 			<Message
 				delete={() => {}}
-                streamerInfo={{ DisplayPlatformColors: false, DisplayPlatformIcons: false, TwitchColor: "#000000", CompactMessages: true }}
+                streamerInfo={{ DisplayPlatformColors: false, DisplayPlatformIcons: false, TwitchColor: "#000000", CompactMessages: false, RemoveMessageGaps: true }}
                 in={true}
                 msg={{
                     body: 'This is a smaller version of the chat so you can fit more messages on the screen. this is a longer message that someone sent because they have something long to say and it gets wrapped fuck onto the next line https://www.twitch.tv/dav1dsnyder404',
