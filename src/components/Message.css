@@ -26,11 +26,6 @@
 	background: #462b45;
 }
 
-.no-gaps{
-    margin: 0 !important;
-	border-radius: 0 !important;
-}
-
 .Compact-message {
 	font-size: 0.75rem;
 	margin: 0;
@@ -114,4 +109,10 @@
 	margin-bottom: -0.25rem;
 	margin: 0 0.1rem;
 	max-width: 24px;
+}
+
+.no-gaps{
+    margin: 0 !important;
+    border-radius: 0 !important;
+    border: none !important
 }

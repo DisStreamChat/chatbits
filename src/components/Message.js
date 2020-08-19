@@ -101,7 +101,7 @@ const Message = React.memo(({ ban, timeout, index, msg, delete: deleteFunc, stre
 				exit: 500,
 			}}
 			key={msg.id}
-			classNames={!streamerInfo.CompactMessages && { ...Transition }}
+			classNames={((!streamerInfo.NoMessageAnimation && !streamerInfo.CompactMessages)) && { ...Transition }}
 			mountOnEnter
 			unmountOnExit
 		>
