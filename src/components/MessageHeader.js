@@ -72,22 +72,23 @@ const MessageHeader = React.memo(
 							styles[`${platform}-${streamerInfo.DisplayPlatformColors}`]
 						}`}
 					>
-                        {streamerInfo.ShowModOptions && moddable && (
-						<React.Fragment>
-							<ContextMenuTrigger id={id}>
-								<MenuIcon />
-							</ContextMenuTrigger>
-							<ContextMenu id={id}>
-								<MenuItem onClick={deleteMe}>Delete Message</MenuItem>
-								{moddable && (
-									<React.Fragment>
-										<MenuItem onClick={timeoutUser}>Timeout User</MenuItem>
-										<MenuItem onClick={banUser}>Ban User</MenuItem>
-									</React.Fragment>
-								)}
-								<MenuItem onClick={pin}>{pinned ? "Unpin" : "Pin"} Message</MenuItem>
-							</ContextMenu>
-						</React.Fragment>)}
+						{streamerInfo.ShowModOptions && (
+							<React.Fragment>
+								<ContextMenuTrigger id={id}>
+									<MenuIcon />
+								</ContextMenuTrigger>
+								<ContextMenu id={id}>
+									{moddable && (
+										<React.Fragment>
+											<MenuItem onClick={deleteMe}>Delete Message</MenuItem>
+											<MenuItem onClick={timeoutUser}>Timeout User</MenuItem>
+											<MenuItem onClick={banUser}>Ban User</MenuItem>
+										</React.Fragment>
+									)}
+									<MenuItem onClick={pin}>{pinned ? "Unpin" : "Pin"} Message</MenuItem>
+								</ContextMenu>
+							</React.Fragment>
+						)}
 
 						{!streamerInfo.CompactMessages && <Avatar className={styles["profile-pic"]} src={avatar} alt="" />}
 
@@ -141,8 +142,7 @@ const MessageHeader = React.memo(
 							  }
 							: {}
 					}
-				>
-				</span>
+				></span>
 			</div>
 		);
 	}
