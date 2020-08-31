@@ -45,7 +45,7 @@ pre::-webkit-scrollbar {
 }
 
 .compact-message{
-    word-break: break-all !important;
+    /* word-break: break-all !important; */
     padding: 0;
     display: inline
 }

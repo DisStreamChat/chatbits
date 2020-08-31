@@ -92,6 +92,10 @@
 	word-break: break-word;
 }
 
+.transparent{
+    background: #00000000 !important
+}
+
 .name-content {
 	margin-right: 0.4rem;
 }
