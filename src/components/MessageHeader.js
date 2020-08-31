@@ -72,23 +72,23 @@ const MessageHeader = React.memo(
 							styles[`${platform}-${streamerInfo.DisplayPlatformColors}`]
 						}`}
 					>
-						{streamerInfo.CompactMessages && (
-							<React.Fragment>
-								<ContextMenuTrigger id={id}>
-									<MenuIcon />
-								</ContextMenuTrigger>
-								<ContextMenu id={id}>
-									<MenuItem onClick={deleteMe}>Delete Message</MenuItem>
-									{moddable && (
-										<React.Fragment>
-											<MenuItem onClick={timeoutUser}>Timeout User</MenuItem>
-											<MenuItem onClick={banUser}>Ban User</MenuItem>
-										</React.Fragment>
-									)}
-									<MenuItem onClick={pin}>{pinned ? "Unpin" : "Pin"} Message</MenuItem>
-								</ContextMenu>
-							</React.Fragment>
-						)}
+                        {streamerInfo.ShowModOptions && moddable && (
+						<React.Fragment>
+							<ContextMenuTrigger id={id}>
+								<MenuIcon />
+							</ContextMenuTrigger>
+							<ContextMenu id={id}>
+								<MenuItem onClick={deleteMe}>Delete Message</MenuItem>
+								{moddable && (
+									<React.Fragment>
+										<MenuItem onClick={timeoutUser}>Timeout User</MenuItem>
+										<MenuItem onClick={banUser}>Ban User</MenuItem>
+									</React.Fragment>
+								)}
+								<MenuItem onClick={pin}>{pinned ? "Unpin" : "Pin"} Message</MenuItem>
+							</ContextMenu>
+						</React.Fragment>)}
+
 						{!streamerInfo.CompactMessages && <Avatar className={styles["profile-pic"]} src={avatar} alt="" />}
 
 						{!streamerInfo.CompactMessages && badges.subscriber && (
@@ -142,31 +142,6 @@ const MessageHeader = React.memo(
 							: {}
 					}
 				>
-					{!isOverlay && !streamerInfo.CompactMessages && (
-						<React.Fragment>
-							{streamerInfo.ShowModOptions && moddable && (
-								<React.Fragment>
-									<Tooltip title="Ban" placement="top" arrow>
-										<button onClick={banUser} className={styles["menu-button"]}>
-											<ButtonIcon letter="B" />
-										</button>
-									</Tooltip>
-									<Tooltip title="Timeout" placement="top" arrow>
-										<button onClick={timeoutUser} className={styles["menu-button"]}>
-											<ButtonIcon letter="T" />
-										</button>
-									</Tooltip>
-								</React.Fragment>
-							)}
-
-							<button className={styles["menu-button"]} onClick={deleteMe}>
-								<HighlightOffTwoToneIcon />
-							</button>
-							<button className={styles["menu-button"]} onClick={pin}>
-								<PinIcon pinned={pinned} />
-							</button>
-						</React.Fragment>
-					)}
 				</span>
 			</div>
 		);

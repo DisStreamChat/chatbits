@@ -9,9 +9,10 @@ const App = () => {
 		<div>
 			<Message
 				delete={() => {}}
-                streamerInfo={{DisplayPlatformColors: false, TwitchColor: "#0000ff", ShowNameColors: true, CompactMessages: false, RemoveMessageGaps: true, TransparentMessageBackground: true }}
+                streamerInfo={{ShowModOptions: true, DisplayPlatformColors: false, TwitchColor: "#0000ff", ShowNameColors: true, CompactMessages: false, RemoveMessageGaps: true, TransparentMessageBackground: false }}
                 in={true}
 				msg={{
+                    moddable: true,
 					body: "test",
 					avatar:
 						"https://static-cdn.jtvnw.net/jtv_user_pictures/b308a27a-1b9f-413a-b22b-3c9b2815a81a-profile_image-70x70.png",
