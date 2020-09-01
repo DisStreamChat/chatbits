@@ -78,9 +78,9 @@ const MessageHeader = React.memo(
 									<MenuIcon />
 								</ContextMenuTrigger>
 								<ContextMenu id={id}>
+                                    <MenuItem onClick={deleteMe}>Delete Message</MenuItem>
 									{moddable && (
 										<React.Fragment>
-											<MenuItem onClick={deleteMe}>Delete Message</MenuItem>
 											<MenuItem onClick={timeoutUser}>Timeout User</MenuItem>
 											<MenuItem onClick={banUser}>Ban User</MenuItem>
 										</React.Fragment>
