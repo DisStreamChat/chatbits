@@ -5,6 +5,9 @@ import Tooltip from "@material-ui/core/Tooltip";
 import styles from "./MessageHeader.css";
 import MenuIcon from "@material-ui/icons/Menu";
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import BlockIcon from '@material-ui/icons/Block';
+import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
 const ButtonIcon = React.memo(({ letter }) => {
 	return (
@@ -62,7 +65,8 @@ const MessageHeader = React.memo(
 		banUser,
 		timeoutUser,
 		NameColor,
-		id,
+        id,
+        streamer
 	}) => {
 		return (
 			<div className={`${styles["msg-header"]} ${streamerInfo.CompactMessages && styles["Compact-header-full"]} ${styles.name}`}>
@@ -124,14 +128,57 @@ const MessageHeader = React.memo(
 							</Tooltip>
 						)}
 					</div>
-					<span
-						style={{
-							color: streamerInfo.ShowNameColors ? NameColor : "",
-						}}
-						className={styles["user-name"]}
-					>
-						{displayName}
-					</span>
+					<ContextMenuTrigger id={`${id}-username`}>
+						<span
+							style={{
+                                color: streamerInfo.ShowNameColors ? NameColor : "",
+                                cursor: "pointer"
+							}}
+							className={styles["user-name"]}
+						>
+							{displayName}
+						</span>
+					</ContextMenuTrigger>
+                    <ContextMenu id={`${id}-username`}>
+				<div className="viewer-context">
+					<div className="viewer-header">
+						<div className="viewer-info">
+							<img src={avatar} alt="" />
+							{displayName}
+						</div>
+						<div className="viewer-icon">
+							<a href={`https://www.twitch.tv/popout/${streamer}/viewercard/${displayName?.toLowerCase?.()}?popout=`}>
+								<ExitToAppIcon />
+							</a>
+						</div>
+					</div>
+					<div className="viewer-body">
+						<div className="mod-icons">
+							<div data-title={`Ban ${displayName}`}>
+								<BlockIcon />
+							</div>
+							<div data-title={`Timeout ${displayName}`}>
+								<AccessTimeIcon />
+							</div>
+							<div data-title={`Purge User`}>
+								1s
+							</div>
+							<div data-title={`Timeout 10min`}>
+								10m
+							</div>
+							<div data-title={`Timeout 1hr`}>
+								1h
+							</div>
+							<div data-title={`Timeout 8hr`}>
+								8h
+							</div>
+							<div data-title={`Timeout 24hr`}>
+								24h
+							</div>
+						</div>
+					</div>
+				</div>
+			</ContextMenu>
 				</span>
 				<span
 					className={styles["menu-buttons"]}
