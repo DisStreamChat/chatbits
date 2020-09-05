@@ -12,7 +12,7 @@ const App = () => {
                 streamerInfo={{ShowModOptions: true, DisplayPlatformColors: false, TwitchColor: "#0000ff", ShowNameColors: true, CompactMessages: false, RemoveMessageGaps: true, TransparentMessageBackground: false }}
                 in={true}
 				msg={{
-                    moddable: true,
+                    // moddable: true,
 					body: "test",
 					avatar:
 						"https://static-cdn.jtvnw.net/jtv_user_pictures/b308a27a-1b9f-413a-b22b-3c9b2815a81a-profile_image-70x70.png",
@@ -27,7 +27,7 @@ const App = () => {
 			/>
 			<Message
 				delete={() => {}}
-                streamerInfo={{ DisplayPlatformColors: false, DisplayPlatformIcons: false, TwitchColor: "#000000", CompactMessages: true, RemoveMessageGaps: true }}
+                streamerInfo={{ ShowModOptions: true, DisplayPlatformColors: false, DisplayPlatformIcons: false, TwitchColor: "#000000", CompactMessages: true, RemoveMessageGaps: true }}
                 in={true}
                 msg={{
                     body: 'This is a smaller version of the chat so you can fit more messages on the screen. this is a longer message that someone sent because they have something long to say and it gets wrapped fuck onto the next line https://www.twitch.tv/dav1dsnyder404',

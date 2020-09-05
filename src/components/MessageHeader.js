@@ -84,7 +84,7 @@ const MessageHeader = React.memo(
 								<ContextMenu id={id}>
 									{streamerInfo.ShowModOptions && (
 										<React.Fragment>
-											<MenuItem onClick={deleteMe}>Delete Message</MenuItem>
+											<MenuItem onClick={deleteMe}>Remove Message</MenuItem>
 											{moddable && (
 												<React.Fragment>
 													<MenuItem onClick={timeoutUser}>Timeout User</MenuItem>
@@ -193,7 +193,7 @@ const MessageHeader = React.memo(
 							<ContextMenu id={id}>
 								{streamerInfo.ShowModOptions && (
 									<React.Fragment>
-										<MenuItem onClick={deleteMe}>Delete Message</MenuItem>
+										<MenuItem onClick={deleteMe}>Remove Message</MenuItem>
 										{moddable && (
 											<React.Fragment>
 												<MenuItem onClick={timeoutUser}>Timeout User</MenuItem>
