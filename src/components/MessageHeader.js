@@ -5,9 +5,9 @@ import Tooltip from "@material-ui/core/Tooltip";
 import styles from "./MessageHeader.css";
 import MenuIcon from "@material-ui/icons/Menu";
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import BlockIcon from '@material-ui/icons/Block';
-import AccessTimeIcon from '@material-ui/icons/AccessTime';
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import BlockIcon from "@material-ui/icons/Block";
+import AccessTimeIcon from "@material-ui/icons/AccessTime";
 
 const ButtonIcon = React.memo(({ letter }) => {
 	return (
@@ -65,8 +65,8 @@ const MessageHeader = React.memo(
 		banUser,
 		timeoutUser,
 		NameColor,
-        id,
-        streamer
+		id,
+		streamer,
 	}) => {
 		return (
 			<div className={`${styles["msg-header"]} ${streamerInfo.CompactMessages && styles["Compact-header-full"]} ${styles.name}`}>
@@ -76,25 +76,27 @@ const MessageHeader = React.memo(
 							styles[`${platform}-${streamerInfo.DisplayPlatformColors}`]
 						}`}
 					>
-						<React.Fragment>
-							<ContextMenuTrigger id={id}>
-								<MenuIcon />
-							</ContextMenuTrigger>
-							<ContextMenu id={id}>
-								{streamerInfo.ShowModOptions && (
-									<React.Fragment>
-										<MenuItem onClick={deleteMe}>Delete Message</MenuItem>
-										{moddable && (
-											<React.Fragment>
-												<MenuItem onClick={timeoutUser}>Timeout User</MenuItem>
-												<MenuItem onClick={banUser}>Ban User</MenuItem>
-											</React.Fragment>
-										)}
-									</React.Fragment>
-								)}
-								<MenuItem onClick={pin}>{pinned ? "Unpin" : "Pin"} Message</MenuItem>
-							</ContextMenu>
-						</React.Fragment>
+						{streamerInfo.CompactMessages && (
+							<React.Fragment>
+								<ContextMenuTrigger id={id}>
+									<MenuIcon />
+								</ContextMenuTrigger>
+								<ContextMenu id={id}>
+									{streamerInfo.ShowModOptions && (
+										<React.Fragment>
+											<MenuItem onClick={deleteMe}>Delete Message</MenuItem>
+											{moddable && (
+												<React.Fragment>
+													<MenuItem onClick={timeoutUser}>Timeout User</MenuItem>
+													<MenuItem onClick={banUser}>Ban User</MenuItem>
+												</React.Fragment>
+											)}
+										</React.Fragment>
+									)}
+									<MenuItem onClick={pin}>{pinned ? "Unpin" : "Pin"} Message</MenuItem>
+								</ContextMenu>
+							</React.Fragment>
+						)}
 
 						{!streamerInfo.CompactMessages && <Avatar className={styles["profile-pic"]} src={avatar} alt="" />}
 
@@ -131,54 +133,44 @@ const MessageHeader = React.memo(
 					<ContextMenuTrigger id={`${id}-username`}>
 						<span
 							style={{
-                                color: streamerInfo.ShowNameColors ? NameColor : "",
-                                cursor: "pointer"
+								color: streamerInfo.ShowNameColors ? NameColor : "",
+								cursor: "pointer",
 							}}
 							className={styles["user-name"]}
 						>
 							{displayName}
 						</span>
 					</ContextMenuTrigger>
-                    <ContextMenu id={`${id}-username`}>
-				<div className="viewer-context">
-					<div className="viewer-header">
-						<div className="viewer-info">
-							<img src={avatar} alt="" />
-							{displayName}
-						</div>
-						<div className="viewer-icon">
-							<a href={`https://www.twitch.tv/popout/${streamer}/viewercard/${displayName?.toLowerCase?.()}?popout=`}>
-								<ExitToAppIcon />
-							</a>
-						</div>
-					</div>
-					<div className="viewer-body">
-						<div className="mod-icons">
-							<div data-title={`Ban ${displayName}`}>
-								<BlockIcon />
+					<ContextMenu id={`${id}-username`}>
+						<div className="viewer-context">
+							<div className="viewer-header">
+								<div className="viewer-info">
+									<img src={avatar} alt="" />
+									{displayName}
+								</div>
+								<div className="viewer-icon">
+									<a href={`https://www.twitch.tv/popout/${streamer}/viewercard/${displayName?.toLowerCase?.()}?popout=`}>
+										<ExitToAppIcon />
+									</a>
+								</div>
 							</div>
-							<div data-title={`Timeout ${displayName}`}>
-								<AccessTimeIcon />
-							</div>
-							<div data-title={`Purge User`}>
-								1s
-							</div>
-							<div data-title={`Timeout 10min`}>
-								10m
-							</div>
-							<div data-title={`Timeout 1hr`}>
-								1h
-							</div>
-							<div data-title={`Timeout 8hr`}>
-								8h
-							</div>
-							<div data-title={`Timeout 24hr`}>
-								24h
+							<div className="viewer-body">
+								<div className="mod-icons">
+									<div data-title={`Ban ${displayName}`}>
+										<BlockIcon />
+									</div>
+									<div data-title={`Timeout ${displayName}`}>
+										<AccessTimeIcon />
+									</div>
+									<div data-title={`Purge User`}>1s</div>
+									<div data-title={`Timeout 10min`}>10m</div>
+									<div data-title={`Timeout 1hr`}>1h</div>
+									<div data-title={`Timeout 8hr`}>8h</div>
+									<div data-title={`Timeout 24hr`}>24h</div>
+								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-			</ContextMenu>
+					</ContextMenu>
 				</span>
 				<span
 					className={styles["menu-buttons"]}
@@ -191,7 +183,30 @@ const MessageHeader = React.memo(
 							  }
 							: {}
 					}
-				></span>
+				>
+					{" "}
+					{!streamerInfo.CompactMessages && (
+						<React.Fragment>
+							<ContextMenuTrigger id={id}>
+								<MenuIcon />
+							</ContextMenuTrigger>
+							<ContextMenu id={id}>
+								{streamerInfo.ShowModOptions && (
+									<React.Fragment>
+										<MenuItem onClick={deleteMe}>Delete Message</MenuItem>
+										{moddable && (
+											<React.Fragment>
+												<MenuItem onClick={timeoutUser}>Timeout User</MenuItem>
+												<MenuItem onClick={banUser}>Ban User</MenuItem>
+											</React.Fragment>
+										)}
+									</React.Fragment>
+								)}
+								<MenuItem onClick={pin}>{pinned ? "Unpin" : "Pin"} Message</MenuItem>
+							</ContextMenu>
+						</React.Fragment>
+					)}
+				</span>
 			</div>
 		);
 	}
