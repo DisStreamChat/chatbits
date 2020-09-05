@@ -1,6 +1,5 @@
-import React, { useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
-import HighlightOffTwoToneIcon from "@material-ui/icons/HighlightOffTwoTone";
 import Tooltip from "@material-ui/core/Tooltip";
 import styles from "./MessageHeader.css";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -68,6 +67,14 @@ const MessageHeader = React.memo(
 		id,
 		streamer,
 	}) => {
+		const [showContexts, setShowContexts] = useState(false);
+
+		useEffect(() => {
+			setTimeout(() => {
+				setShowContexts(true);
+			}, 700);
+		}, []);
+
 		return (
 			<div className={`${styles["msg-header"]} ${streamerInfo.CompactMessages && styles["Compact-header-full"]} ${styles.name}`}>
 				<span className={styles.name}>
@@ -130,7 +137,51 @@ const MessageHeader = React.memo(
 							</Tooltip>
 						)}
 					</div>
-					<ContextMenuTrigger id={`${id}-username`}>
+					{showContexts ? (
+						<React.Fragment>
+							<ContextMenuTrigger id={`${id}-username`}>
+								<span
+									style={{
+										color: streamerInfo.ShowNameColors ? NameColor : "",
+										cursor: "pointer",
+									}}
+									className={styles["user-name"]}
+								>
+									{displayName}
+								</span>
+							</ContextMenuTrigger>
+							<ContextMenu id={`${id}-username`}>
+								<div className="viewer-context">
+									<div className="viewer-header">
+										<div className="viewer-info">
+											<img src={avatar} alt="" />
+											{displayName}
+										</div>
+										<div className="viewer-icon">
+											<a href={`https://www.twitch.tv/popout/${streamer}/viewercard/${displayName?.toLowerCase?.()}?popout=`}>
+												<ExitToAppIcon />
+											</a>
+										</div>
+									</div>
+									<div className="viewer-body">
+										<div className="mod-icons">
+											<div data-title={`Ban ${displayName}`}>
+												<BlockIcon />
+											</div>
+											<div data-title={`Timeout ${displayName}`}>
+												<AccessTimeIcon />
+											</div>
+											<div data-title={`Purge User`}>1s</div>
+											<div data-title={`Timeout 10min`}>10m</div>
+											<div data-title={`Timeout 1hr`}>1h</div>
+											<div data-title={`Timeout 8hr`}>8h</div>
+											<div data-title={`Timeout 24hr`}>24h</div>
+										</div>
+									</div>
+								</div>
+							</ContextMenu>
+						</React.Fragment>
+					) : (
 						<span
 							style={{
 								color: streamerInfo.ShowNameColors ? NameColor : "",
@@ -140,37 +191,7 @@ const MessageHeader = React.memo(
 						>
 							{displayName}
 						</span>
-					</ContextMenuTrigger>
-					<ContextMenu id={`${id}-username`}>
-						<div className="viewer-context">
-							<div className="viewer-header">
-								<div className="viewer-info">
-									<img src={avatar} alt="" />
-									{displayName}
-								</div>
-								<div className="viewer-icon">
-									<a href={`https://www.twitch.tv/popout/${streamer}/viewercard/${displayName?.toLowerCase?.()}?popout=`}>
-										<ExitToAppIcon />
-									</a>
-								</div>
-							</div>
-							<div className="viewer-body">
-								<div className="mod-icons">
-									<div data-title={`Ban ${displayName}`}>
-										<BlockIcon />
-									</div>
-									<div data-title={`Timeout ${displayName}`}>
-										<AccessTimeIcon />
-									</div>
-									<div data-title={`Purge User`}>1s</div>
-									<div data-title={`Timeout 10min`}>10m</div>
-									<div data-title={`Timeout 1hr`}>1h</div>
-									<div data-title={`Timeout 8hr`}>8h</div>
-									<div data-title={`Timeout 24hr`}>24h</div>
-								</div>
-							</div>
-						</div>
-					</ContextMenu>
+					)}
 				</span>
 				<span
 					className={styles["menu-buttons"]}
@@ -185,7 +206,7 @@ const MessageHeader = React.memo(
 					}
 				>
 					{" "}
-					{!streamerInfo.CompactMessages && (
+					{(!streamerInfo.CompactMessages && showContexts) && (
 						<React.Fragment>
 							<ContextMenuTrigger id={id}>
 								<MenuIcon />
