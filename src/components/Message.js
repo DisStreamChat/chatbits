@@ -72,7 +72,8 @@ const Message = React.memo(({ deny, accept, ban, timeout, index, msg, delete: de
 		setNameColor(newNameColor);
 		const isBackgroundLight = brightnessByColor(backgroundColor) / 255 > 0.6;
 		setIsLight(isBackgroundLight);
-		const color = backgroundColor === "" || !streamerInfo.DisplayPlatformColors ? "" : isBackgroundLight ? "black" : "white";
+        const color = backgroundColor === "" || !streamerInfo.DisplayPlatformColors ? "" : isBackgroundLight ? "black" : "white";
+        if(msg.autoMod) backgroundColor = null
 		setColor({
 			backgroundColor,
 			color,
