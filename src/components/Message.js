@@ -101,8 +101,8 @@ const Message = React.memo(({ deny, accept, ban, timeout, index, msg, delete: de
 				const acceptButton = document.getElementById(acceptId);
 				const denyButton = document.getElementById(denyId);
 				if (acceptButton && denyButton) {
-					acceptButton.addEventListener("click", () => accept(msg));
-					denyButton.addEventListener("click", () => deny(msg));
+					acceptButton.onclick = () => accept(msg);
+					denyButton.onclick = () => deny(msg);
 				}
 			} catch (err) {}
 		}
