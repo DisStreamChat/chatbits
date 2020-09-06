@@ -35,11 +35,11 @@ function brightnessByColor(color) {
 	if (typeof r != "undefined") return (r * 299 + g * 587 + b * 114) / 1000;
 }
 
-const Message = React.memo(({ ban, timeout, index, msg, delete: deleteFunc, streamerInfo, isOverlay, forwardRef, pin, in: inProp }) => {
+const Message = React.memo(({ deny, accept, ban, timeout, index, msg, delete: deleteFunc, streamerInfo, isOverlay, forwardRef, pin, in: inProp }) => {
 	const [color, setColor] = useState({});
-    const [mounted, setMounted] = useState(false);
-    const [nameColor, setNameColor] = useState()
-    const [islight, setIsLight] = useState()
+	const [mounted, setMounted] = useState(false);
+	const [nameColor, setNameColor] = useState();
+	const [islight, setIsLight] = useState();
 	const nameColorAdjuster = useRef();
 
 	useEffect(() => {
@@ -65,15 +65,14 @@ const Message = React.memo(({ ban, timeout, index, msg, delete: deleteFunc, stre
 				: streamerInfo.DiscordColor;
 		if (!nameColorAdjuster.current) {
 			nameColorAdjuster.current = new ColorAdjuster(backgroundColor || "#515151", 2);
-		}else{
-            nameColorAdjuster.current.base = backgroundColor || "#515151"
-        }
-        const newNameColor = nameColorAdjuster.current.process(msg.userColor)
-        setNameColor(newNameColor)
-        const isBackgroundLight = brightnessByColor(backgroundColor) / 255 > 0.6;
-        setIsLight(isBackgroundLight)
-		const color =
-			backgroundColor === "" || !streamerInfo.DisplayPlatformColors ? "" : isBackgroundLight ? "black" : "white";
+		} else {
+			nameColorAdjuster.current.base = backgroundColor || "#515151";
+		}
+		const newNameColor = nameColorAdjuster.current.process(msg.userColor);
+		setNameColor(newNameColor);
+		const isBackgroundLight = brightnessByColor(backgroundColor) / 255 > 0.6;
+		setIsLight(isBackgroundLight);
+		const color = backgroundColor === "" || !streamerInfo.DisplayPlatformColors ? "" : isBackgroundLight ? "black" : "white";
 		setColor({
 			backgroundColor,
 			color,
@@ -92,6 +91,21 @@ const Message = React.memo(({ ban, timeout, index, msg, delete: deleteFunc, stre
 		timeout(msg.uuid, msg.platform);
 	}, [msg, timeout]);
 
+	const msgId = msg?.id;
+	useEffect(() => {
+		if (msgId) {
+			try {
+				const acceptId = `${msgId}-accept`;
+				const denyId = `${msgId}-deny`;
+				const acceptButton = document.getElementById(acceptId);
+				const denyButton = document.getElementById(denyId);
+				if (acceptButton && denyButton) {
+					acceptButton.addEventListener("click", () => accept(msg));
+					denyButton.addEventListener("click", () => deny(msg));
+				}
+			} catch (err) {}
+		}
+	}, [msgId, msg]);
 
 	return (
 		<CSSTransition
@@ -101,7 +115,7 @@ const Message = React.memo(({ ban, timeout, index, msg, delete: deleteFunc, stre
 				exit: 500,
 			}}
 			key={msg.id}
-			classNames={((!streamerInfo.NoMessageAnimation && !streamerInfo.CompactMessages)) && { ...Transition }}
+			classNames={!streamerInfo.NoMessageAnimation && !streamerInfo.CompactMessages && { ...Transition }}
 			mountOnEnter
 			unmountOnExit
 		>
@@ -110,7 +124,9 @@ const Message = React.memo(({ ban, timeout, index, msg, delete: deleteFunc, stre
 					ref={forwardRef}
 					data-idx={index}
 					style={streamerInfo.DisplayPlatformColors ? color : {}}
-					className={`${islight ? "dark" : "light"} ${streamerInfo.TransparentMessageBackground ? styles["transparent"] : ""} ${streamerInfo.RemoveMessageGaps ? styles["no-gaps"] : ""} ${styles["message"]} ${streamerInfo.CompactMessages && styles["Compact-message"]} ${styles[msg.messageId]} ${
+					className={`${islight ? "dark" : "light"} ${streamerInfo.TransparentMessageBackground ? styles["transparent"] : ""} ${
+						streamerInfo.RemoveMessageGaps ? styles["no-gaps"] : ""
+					} ${styles["message"]} ${streamerInfo.CompactMessages && styles["Compact-message"]} ${styles[msg.messageId]} ${
 						streamerInfo.DisplayPlatformColors && styles[msg.platform + "-message"]
 					}`}
 				>
@@ -121,8 +137,8 @@ const Message = React.memo(({ ban, timeout, index, msg, delete: deleteFunc, stre
 						banUser={banMe}
 						timeoutUser={timeoutMe}
 						streamerInfo={streamerInfo}
-                        {...msg}
-                        NameColor={nameColor}
+						{...msg}
+						NameColor={nameColor}
 					/>
 					<MessageBody isOverlay={!!isOverlay} streamerInfo={streamerInfo} {...msg} />
 					{!streamerInfo.CompactMessages && <MessageFooter isOverlay={!!isOverlay} streamerInfo={streamerInfo} {...msg} />}
