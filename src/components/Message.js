@@ -47,7 +47,7 @@ const Message = React.memo(({ deny, accept, ban, timeout, index, msg, delete: de
 	}, [inProp]);
 
 	useEffect(() => {
-		const backgroundColor =
+		let backgroundColor =
 			msg.messageId === "raid"
 				? streamerInfo.RaidColor
 				: msg.messageId === "follow"
@@ -125,7 +125,7 @@ const Message = React.memo(({ deny, accept, ban, timeout, index, msg, delete: de
 					ref={forwardRef}
 					data-idx={index}
 					style={streamerInfo.DisplayPlatformColors ? color : {}}
-					className={`${islight ? "dark" : "light"} ${streamerInfo.TransparentMessageBackground ? styles["transparent"] : ""} ${
+					className={`${msg.autoMod ? styles["no-background"] : ""}${islight ? "dark" : "light"} ${streamerInfo.TransparentMessageBackground ? styles["transparent"] : ""} ${
 						streamerInfo.RemoveMessageGaps ? styles["no-gaps"] : ""
 					} ${styles["message"]} ${streamerInfo.CompactMessages && styles["Compact-message"]} ${styles[msg.messageId]} ${
 						streamerInfo.DisplayPlatformColors && styles[msg.platform + "-message"]

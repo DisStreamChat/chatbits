@@ -120,3 +120,7 @@
     border-radius: 0 !important;
     border: none !important
 }
+
+.no-background{
+    background: #515151 !important
+}
