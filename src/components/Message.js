@@ -95,16 +95,19 @@ const Message = React.memo(({ deny, accept, ban, timeout, index, msg, delete: de
 	const msgId = msg?.id;
 	useEffect(() => {
 		if (msgId) {
-			try {
-				const acceptId = `${msgId}-accept`;
-				const denyId = `${msgId}-deny`;
-				const acceptButton = document.getElementById(acceptId);
-				const denyButton = document.getElementById(denyId);
-				if (acceptButton && denyButton) {
-					acceptButton.onclick = () => accept(msg);
-					denyButton.onclick = () => deny(msg);
-				}
-			} catch (err) {}
+            const timeId = setTimeout(() => {
+                try {
+                    const acceptId = `${msgId}-accept`;
+                    const denyId = `${msgId}-deny`;
+                    const acceptButton = document.getElementById(acceptId);
+                    const denyButton = document.getElementById(denyId);
+                    if (acceptButton && denyButton) {
+                        acceptButton.onclick = () => accept(msg);
+                        denyButton.onclick = () => deny(msg);
+                    }
+                } catch (err) {}
+            }, 500)
+            return clearTimeout(timeId)
 		}
 	}, [msgId, msg]);
 
