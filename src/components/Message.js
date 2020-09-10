@@ -107,7 +107,7 @@ const Message = React.memo(({ deny, accept, ban, timeout, index, msg, delete: de
                     }
                 } catch (err) {}
             }, 500)
-            return clearTimeout(timeId)
+            // return clearTimeout(timeId)
 		}
 	}, [msgId, msg]);
 
@@ -139,7 +139,9 @@ const Message = React.memo(({ deny, accept, ban, timeout, index, msg, delete: de
 						deleteMe={deleteMe}
 						pin={pin}
 						banUser={banMe}
-						timeoutUser={timeoutMe}
+                        timeoutUser={timeoutMe}
+                        ban={ban}
+                        timeout={timeout}
 						streamerInfo={streamerInfo}
 						{...msg}
 						NameColor={nameColor}

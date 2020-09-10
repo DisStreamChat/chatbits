@@ -66,13 +66,15 @@ const MessageHeader = React.memo(
 		NameColor,
 		id,
 		streamer,
+		ban,
+		timeout,
 	}) => {
 		const [showContexts, setShowContexts] = useState(false);
 
 		useEffect(() => {
 			setTimeout(() => {
 				setShowContexts(true);
-			}, 700);
+			}, 300);
 		}, []);
 
 		return (
@@ -164,19 +166,40 @@ const MessageHeader = React.memo(
 										</div>
 									</div>
 									<div className="viewer-body">
-										<div className="mod-icons">
-											<div data-title={`Ban ${displayName}`}>
-												<BlockIcon />
+										{moddable && (
+											<div className="mod-icons">
+												<div onClick={() => ban(displayName?.toLowerCase?.(), platform)} data-title={`Ban ${displayName}`}>
+													<BlockIcon />
+												</div>
+												<div onClick={timeoutUser} data-title={`Timeout ${displayName}`}>
+													<AccessTimeIcon />
+												</div>
+												<div onClick={() => timeout(displayName?.toLowerCase?.(), platform, 1)} data-title={`Purge User`}>
+													1s
+												</div>
+												<div
+													onClick={() => timeout(displayName?.toLowerCase?.(), platform, 600)}
+													data-title={`Timeout 10min`}
+												>
+													10m
+												</div>
+												<div onClick={() => timeout(displayName?.toLowerCase?.(), platform, 3600)} data-title={`Timeout 1hr`}>
+													1h
+												</div>
+												<div
+													onClick={() => timeout(displayName?.toLowerCase?.(), platform, 28800)}
+													data-title={`Timeout 8hr`}
+												>
+													8h
+												</div>
+												<div
+													onClick={() => timeout(displayName?.toLowerCase?.(), platform, 86400)}
+													data-title={`Timeout 24hr`}
+												>
+													24h
+												</div>
 											</div>
-											<div data-title={`Timeout ${displayName}`}>
-												<AccessTimeIcon />
-											</div>
-											<div data-title={`Purge User`}>1s</div>
-											<div data-title={`Timeout 10min`}>10m</div>
-											<div data-title={`Timeout 1hr`}>1h</div>
-											<div data-title={`Timeout 8hr`}>8h</div>
-											<div data-title={`Timeout 24hr`}>24h</div>
-										</div>
+										)}
 									</div>
 								</div>
 							</ContextMenu>
@@ -206,7 +229,7 @@ const MessageHeader = React.memo(
 					}
 				>
 					{" "}
-					{(!streamerInfo.CompactMessages && showContexts) && (
+					{!streamerInfo.CompactMessages && showContexts && (
 						<React.Fragment>
 							<ContextMenuTrigger id={id}>
 								<MenuIcon />
