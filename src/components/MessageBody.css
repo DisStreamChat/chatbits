@@ -49,3 +49,9 @@ pre::-webkit-scrollbar {
     padding: 0;
     display: inline
 }
+
+.emoji{
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-top: .25rem;
+}
