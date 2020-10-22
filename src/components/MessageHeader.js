@@ -7,6 +7,7 @@ import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import BlockIcon from "@material-ui/icons/Block";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
+import CancelTwoToneIcon from "@material-ui/icons/CancelTwoTone";
 
 const ButtonIcon = React.memo(({ letter }) => {
 	return (
@@ -73,7 +74,7 @@ const MessageHeader = React.memo(
 
 		useEffect(() => {
 			setTimeout(() => {
-				setShowContexts(true);
+				setShowContexts(!isOverlay);
 			}, 300);
 		}, []);
 
@@ -85,27 +86,38 @@ const MessageHeader = React.memo(
 							styles[`${platform}-${streamerInfo.DisplayPlatformColors}`]
 						}`}
 					>
-						{streamerInfo.CompactMessages && (
-							<React.Fragment>
-								<ContextMenuTrigger id={id}>
-									<MenuIcon />
-								</ContextMenuTrigger>
-								<ContextMenu id={id}>
-									{streamerInfo.ShowModOptions && (
-										<React.Fragment>
-											<MenuItem onClick={deleteMe}>Remove Message</MenuItem>
-											{moddable && (
-												<React.Fragment>
-													<MenuItem onClick={timeoutUser}>Timeout User</MenuItem>
-													<MenuItem onClick={banUser}>Ban User</MenuItem>
-												</React.Fragment>
-											)}
-										</React.Fragment>
-									)}
-									<MenuItem onClick={pin}>{pinned ? "Unpin" : "Pin"} Message</MenuItem>
-								</ContextMenu>
-							</React.Fragment>
-						)}
+						{showContexts &&
+							streamerInfo.CompactMessages &&
+							(!streamerInfo.CompactMessages ? (
+								<React.Fragment>
+									<ContextMenuTrigger id={id}>
+										<MenuIcon />
+									</ContextMenuTrigger>
+									<ContextMenu id={id}>
+										{streamerInfo.ShowModOptions && (
+											<React.Fragment>
+												<MenuItem onClick={deleteMe}>Remove Message</MenuItem>
+												{moddable && (
+													<React.Fragment>
+														<MenuItem onClick={timeoutUser}>Timeout User</MenuItem>
+														<MenuItem onClick={banUser}>Ban User</MenuItem>
+													</React.Fragment>
+												)}
+											</React.Fragment>
+										)}
+										<MenuItem onClick={pin}>{pinned ? "Unpin" : "Pin"} Message</MenuItem>
+									</ContextMenu>
+								</React.Fragment>
+							) : (
+								<React.Fragment>
+									<span onClick={pin}>
+										<PinIcon pinned={pinned} />
+									</span>
+									<span onClick={deleteMe}>
+										<CancelTwoToneIcon />
+									</span>
+								</React.Fragment>
+							))}
 
 						{!streamerInfo.CompactMessages && <Avatar className={styles["profile-pic"]} src={avatar} alt="" />}
 
@@ -229,27 +241,34 @@ const MessageHeader = React.memo(
 					}
 				>
 					{" "}
-					{!streamerInfo.CompactMessages && showContexts && (
-						<React.Fragment>
-							<ContextMenuTrigger id={id}>
-								<MenuIcon />
-							</ContextMenuTrigger>
-							<ContextMenu id={id}>
-								{streamerInfo.ShowModOptions && (
-									<React.Fragment>
-										<MenuItem onClick={deleteMe}>Remove Message</MenuItem>
-										{moddable && (
-											<React.Fragment>
-												<MenuItem onClick={timeoutUser}>Timeout User</MenuItem>
-												<MenuItem onClick={banUser}>Ban User</MenuItem>
-											</React.Fragment>
-										)}
-									</React.Fragment>
-								)}
-								<MenuItem onClick={pin}>{pinned ? "Unpin" : "Pin"} Message</MenuItem>
-							</ContextMenu>
-						</React.Fragment>
-					)}
+					{showContexts &&
+						!streamerInfo.CompactMessages &&
+						(streamerInfo.ShowModOptions ? (
+							<React.Fragment>
+								<ContextMenuTrigger id={id}>
+									<MenuIcon />
+								</ContextMenuTrigger>
+								<ContextMenu id={id}>
+									<MenuItem onClick={deleteMe}>Remove Message</MenuItem>
+									{moddable && (
+										<React.Fragment>
+											<MenuItem onClick={timeoutUser}>Timeout User</MenuItem>
+											<MenuItem onClick={banUser}>Ban User</MenuItem>
+										</React.Fragment>
+									)}
+									<MenuItem onClick={pin}>{pinned ? "Unpin" : "Pin"} Message</MenuItem>
+								</ContextMenu>
+							</React.Fragment>
+						) : (
+							<React.Fragment>
+								<span onClick={pin}>
+									<PinIcon pinned={pinned} />
+								</span>
+								<span onClick={deleteMe}>
+									<CancelTwoToneIcon />
+								</span>
+							</React.Fragment>
+						))}
 				</span>
 			</div>
 		);
