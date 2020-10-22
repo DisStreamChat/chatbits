@@ -88,7 +88,7 @@ const MessageHeader = React.memo(
 					>
 						{showContexts &&
 							streamerInfo.CompactMessages &&
-							(!streamerInfo.CompactMessages ? (
+							(!streamerInfo.ShowModOptions ? (
 								<React.Fragment>
 									<ContextMenuTrigger id={id}>
 										<MenuIcon />
