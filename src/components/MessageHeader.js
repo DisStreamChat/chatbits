@@ -25,22 +25,22 @@ const ButtonIcon = React.memo(({ letter }) => {
 });
 
 const PinIcon = React.memo(({ pinned }) => {
-	return !pinned ? (
+	return pinned ? (
 		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
-			<path opacity=".3" d="M14 4h-4v5c0 1.1-.35 2.14-1 3h6c-.63-.84-1-1.88-1-3V4z" fill="currentColor" />
+			<path opacity=".3" d="M14 4h-4v5c0 1.1-.35 2.14-1 3h6c-.63-.84-1-1.88-1-3V4z" fill="green" />
 			<path
 				d="M19 12c-1.66 0-3-1.34-3-3V4h1c.55 0 1-.45 1-1s-.45-1-1-1H7c-.55 0-1 .45-1 1s.45 1 1 1h1v5c0 1.66-1.34 3-3 3v2h5.97v7l1 1l1-1v-7H19v-2zM9 12c.65-.86 1-1.9 1-3V4h4v5c0 1.12.37 2.16 1 3H9z"
-				fill="currentColor"
+				fill="green"
 			/>
 		</svg>
 	) : (
 		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
-			<path opacity=".3" d="M9.644 12.184L11.461 14H8v-.172l1.644-1.644zM13 4v6.46l-.73-.73L11 8.46V4h2z" fill="currentColor" />
+			<path opacity=".3" d="M9.644 12.184L11.461 14H8v-.172l1.644-1.644zM13 4v6.46l-.73-.73L11 8.46V4h2z" fill="red" />
 			<path
 				d="M9 9l1.914 1.914L8 13.828V14h6l2 2h-3v4l-1 3l-1-3v-4H6v-3l3-3V9zm8-7v2l-2 1v5l3 3v2.461l-5-5.001V4h-2v4.46l-2-2V5L7 4V2h10z"
-				fill="currentColor"
+				fill="red"
 			/>
-			<path d="M2.27 2.27L1 3.54L20.46 23l1.27-1.27L11 11z" fill="currentColor" />
+			<path d="M2.27 2.27L1 3.54L20.46 23l1.27-1.27L11 11z" fill="red" />
 		</svg>
 	);
 });

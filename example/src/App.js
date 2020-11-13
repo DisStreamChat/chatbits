@@ -21,6 +21,7 @@ const App = () => {
 				// isOverlay
 				msg={{
 					// moddable: true,
+					pinned: true,
 					body: "test 👋",
 					avatar: "https://static-cdn.jtvnw.net/jtv_user_pictures/b308a27a-1b9f-413a-b22b-3c9b2815a81a-profile_image-70x70.png",
 					displayName: "david",
